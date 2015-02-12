@@ -26,5 +26,5 @@ AnimImageView also provides some method for manual control:
 	void stopAnimation()
 
 ##
-I'm glad to have you good idea for this. My email is jackoder@qq.com. 
+I'm glad to have your good ideas for this. My email is jackoder@qq.com :)
 
