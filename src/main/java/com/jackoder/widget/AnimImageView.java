@@ -4,17 +4,17 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
-import com.nd.up91.ui.R;
 
 /**
  * Created by Jackoder on 2015/2/12.
  */
 public class AnimImageView extends ImageView {
 
-    //setVisible会把AnimationDrawable停止，所以需要记住上一次用户是否手动触发了start
-    boolean manualStart = false;
+    boolean lastRunningState = false;
     boolean autoRun = true;
     AnimationDrawable animationDrawable;
 
@@ -46,14 +46,31 @@ public class AnimImageView extends ImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (animationDrawable != null && (manualStart || autoRun) && !animationDrawable.isRunning()) {
+        if (animationDrawable != null && (lastRunningState || autoRun) && !animationDrawable.isRunning()) {
             animationDrawable.start();
         }
     }
 
-    public void setAnimationDrawable(AnimationDrawable animationDrawable) {
-        this.animationDrawable = animationDrawable;
-        setImageDrawable(animationDrawable);
+    @Override
+    public void setImageDrawable(Drawable drawable) {
+        super.setImageDrawable(drawable);
+        if (drawable instanceof AnimationDrawable) {
+            this.animationDrawable = (AnimationDrawable)drawable;
+        }
+    }
+
+    @Override
+    public void setVisibility(int visibility) {
+        //if visiblity is VISIBLE, the AnimationDrawable will auto start the animation, so we control the state by ourself.
+        if (visibility != View.VISIBLE) {
+            lastRunningState = animationDrawable.isRunning();
+        }
+        super.setVisibility(visibility);
+        if (visibility == View.VISIBLE) {
+            if (!lastRunningState) {
+                stopAnimation();
+            }
+        }
     }
 
     public void startAnimation() {
@@ -61,7 +78,6 @@ public class AnimImageView extends ImageView {
     }
 
     public void startAnimation(boolean reStart) {
-        manualStart = true;
         if (animationDrawable != null) {
             if (animationDrawable.isRunning()) {
                 if (reStart) {
@@ -75,7 +91,6 @@ public class AnimImageView extends ImageView {
     }
 
     public void stopAnimation() {
-        manualStart = false;
         if (animationDrawable != null && animationDrawable.isRunning()) {
             animationDrawable.stop();
         }

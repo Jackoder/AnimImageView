@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.jackoder.widget.AnimImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/empty_loading"
+        android:visibility="gone" />
+
+    <com.jackoder.widget.AnimImageView
+            xmlns:aiv="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/aiv_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/empty_loading"
+            aiv:aiv_auto="false"/>
+
+    <Button
+            android:id="@+id/btn_anim_toggle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start / Pause" />
+
+    <Button
+            android:id="@+id/btn_visible_toggle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hide / Display" />
+
+</LinearLayout>

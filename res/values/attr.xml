@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="AnimImageView">
+        <attr name="aiv_auto" format="boolean"/>
+    </declare-styleable>
 </resources>
