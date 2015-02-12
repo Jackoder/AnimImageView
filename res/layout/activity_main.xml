@@ -7,8 +7,7 @@
     <com.jackoder.widget.AnimImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/empty_loading"
-        android:visibility="gone" />
+        android:src="@drawable/empty_loading" />
 
     <com.jackoder.widget.AnimImageView
             xmlns:aiv="http://schemas.android.com/apk/res-auto"
